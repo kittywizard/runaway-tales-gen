@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Button from "./components/Button";
 import Prompt from "./components/Prompt";
 import { toppings } from "./data/toppings";
@@ -8,8 +10,12 @@ import useGenerator from "./hooks/useGenerator"
 
 
 export default function Main() {
+    const [dropdownState, setDropdownState] = useState({
+        theme: ""
+    });
 
-    const {getPrompt, chosenPrompts} = useGenerator();
+    const {getPrompt, chosenPrompts} = useGenerator(dropdownState);
+
 
     const promptMap = chosenPrompts.map(prompt => (
         <Prompt 
@@ -32,6 +38,8 @@ export default function Main() {
             </p>
             <Dropdown 
                 name="theme"
+                dropdownState={dropdownState}
+                setDropdownState={setDropdownState}
             />
             <section className="flex justify-center p-6">
                 <h2 className="m-2 p-2 font-bold text-2xl text-gray">Generate a Flavor?</h2>

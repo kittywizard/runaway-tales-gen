@@ -1,21 +1,22 @@
 import {useState, useEffect} from "react";
 import { flavorData } from "../data/flavors";
-import useDropdown from "./useDropdown";
 
 
-function useGenerator() {
+function useGenerator(props) {
 
     const [flavors, setFlavors] = useState(flavorData);
-    const {dropdownState} = useDropdown();
+    
     const [chosenPrompts, setChosenPrompts] = useState([]);
+    console.log(props)
+
 
     function getPrompt() {
 
         let promptObj = {};
 
-        console.log(dropdownState)
         //if user hasn't selected anything from the dropdown
-        if(dropdownState.theme === "") {
+        if(props.theme === "") {
+
             let randomFlavorNum = Math.floor((Math.random() * (flavors.length - 0 + 1)) + 0);
             let randomPromptNum = Math.floor((Math.random() * (flavors[randomFlavorNum].prompts.length - 0 + 1)) + 0);
     
@@ -24,22 +25,24 @@ function useGenerator() {
             promptObj = {
                 prompt: prompt,
                 flavor: flavors[randomFlavorNum].flavor,
-                number: randomPromptNum,
+                number: randomPromptNum + 1,
                 promptType: flavors[randomFlavorNum].theme
             }
         } else {
-            //need to gather all the flavors that fit the theme given
-            //search array? 
-            let flavorPrompts = grabFlavors(dropdownState.theme)
+
+            
+            //let flavorPrompts = grabFlavors(props.theme)
+            let flavorPrompts = flavors.filter(flavor => flavor.theme === props.theme);
+            console.log(flavorPrompts)
 
             let randomFlavorNum = Math.floor((Math.random() * (flavorPrompts.length - 0 + 1)) + 0);
-            let randomPromptNum = Math.floor((Math.random() * (30 - 0 + 1)) + 0);
+            let randomPromptNum = Math.floor((Math.random() * (flavorPrompts[randomFlavorNum].prompts.length - 0 + 1)) + 0);
 
             promptObj = {
-                prompt: prompt,
-                flavor: flavors[randomFlavorNum].flavor,
-                number: randomPromptNum,
-                promptType: flavors[randomFlavorNum].theme
+                prompt: flavorPrompts[randomFlavorNum].prompts[randomPromptNum],
+                flavor: flavorPrompts[randomFlavorNum].flavor,
+                number: randomPromptNum + 1,
+                promptType: flavorPrompts[randomFlavorNum].theme
             }
         }
        
@@ -52,7 +55,7 @@ function useGenerator() {
         });
     }
 
-    const grabFlavors = (theme) => flavors.map(flavor => flavor.theme === theme);
+    //const grabFlavors = (theme) => flavors.filter(flavor => flavor.theme === theme);
 
     function generateNumbers(flavorNum, promptNum) {
 
