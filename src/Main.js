@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
+import {nanoid } from "nanoid";
 
 import Button from "./components/Button";
 import Prompt from "./components/Prompt";
-import {nanoid } from "nanoid";
 import Dropdown from "./components/Dropdown";
+import Intro from "./Intro";
 
 import useGenerator from "./hooks/useGenerator"
 import useTopping from "./hooks/useTopping";
 import Topping from "./components/Topping";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAngleDown, faAngleLeft} from '@fortawesome/free-solid-svg-icons';
 
 export default function Main() {
     const [dropdownState, setDropdownState] = useState({
@@ -28,20 +32,15 @@ export default function Main() {
     //need to check if promptMap gets updated and then display the topping stuff
     useEffect(() => {
         promptMap.length > 0 && setDisplayTopping(true)
-    }, [promptMap])
+    }, [promptMap]);
+
+    function handleIconClick() {
+        //set state and hide this section! also change icon
+    }
 
     return (
         <main className="container mx-auto flex-col justify-center">
-            <p className="p-2 text-sm text-center">
-                Runaway Tales is a prompt based writing/art challenge, originally hosted on livejournal, now hosted at  
-                <a href="http://wriye.proboards.com" 
-                    className="font-bold text-dark-green hover:bg-gray-green-light hover:border-b-1 hover:border-b-black"
-                    rel="noreferrer" 
-                    target="_blank"
-                > WriYe
-                </a>, a year round writing community.
-                 There are over 3,500 prompts, separated into different 'flavors' based around themes (like emotions, props and actions). Pick one and get started!
-            </p>
+            <Intro />
             <Dropdown 
                 name="theme"
                 dropdownState={dropdownState}
@@ -58,6 +57,11 @@ export default function Main() {
 
             {displayTopping &&
             <section className="max-w-2xl flex-col justify-center m-auto bg-gray-green-light p-6 my-2 shadow-sm shadow-gray-dark/30">
+                <FontAwesomeIcon 
+                    icon={faAngleLeft} 
+                    onClick={handleIconClick}
+                    className="text-3xl text-dark-green hover:text-gray-dark"
+                />
                 <section className="flex justify-center items-baseline my-2">
                     <h3 className="m-4">
                         Need a topping to go with that flavor?
