@@ -498,9 +498,27 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin: 0.5rem;
 }
 
+.m-4 {
+  margin: 1rem;
+}
+
+.m-auto {
+  margin: auto;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .flex {
@@ -509,6 +527,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hidden {
   display: none;
+}
+
+.max-w-2xl {
+  max-width: 42rem;
 }
 
 .flex-col {
@@ -521,6 +543,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .items-center {
   align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
 }
 
 .justify-center {
@@ -549,6 +575,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgba(228, 248, 229, 1);
 }
 
+.bg-gray {
+  background-color: rgba(50,50,50,0.8);
+}
+
+.bg-gray\/50 {
+  background-color: rgb(50 50 50 / 0.5);
+}
+
+.bg-gray\/30 {
+  background-color: rgb(50 50 50 / 0.3);
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -573,6 +611,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .text-center {
   text-align: center;
+}
+
+.align-baseline {
+  vertical-align: baseline;
 }
 
 .font-serif {

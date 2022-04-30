@@ -14,13 +14,13 @@ function useGenerator(props) {
 
         //if user hasn't selected anything from the dropdown, grab from all flavors
         if(props.theme === "") {
-            const allNumbers = generateNumbers(flavors.length);
+            const allNumbers = generateNumbers(flavors);
             promptObj = setPromptObj(allNumbers[0], allNumbers[1], flavors);
 
         } else {
 
             const flavorPrompts = flavors.filter(flavor => flavor.theme === props.theme);
-            const numbers = generateNumbers(flavorPrompts.length);
+            const numbers = generateNumbers(flavorPrompts);
             promptObj = setPromptObj(numbers[0], numbers[1], flavorPrompts);
         }
        
@@ -35,10 +35,10 @@ function useGenerator(props) {
     }
 
     //random number generator
-    function generateNumbers(flavorNum) {
+    function generateNumbers(flavorArray) {
 
-        let randomFlavorNum = Math.floor((Math.random() * flavorNum) + 0);
-        let randomPromptNum = Math.floor((Math.random() * 30) + 0); //fix later - a few prompt arrays don't have a length of 30
+        let randomFlavorNum = Math.floor((Math.random() * flavorArray.length) + 0);
+        let randomPromptNum = Math.floor((Math.random() * flavorArray[randomFlavorNum].prompts.length) + 0); //fix later - a few prompt arrays don't have a length of 30
 
         return [
             randomFlavorNum,

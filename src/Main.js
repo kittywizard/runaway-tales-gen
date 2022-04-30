@@ -1,28 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "./components/Button";
 import Prompt from "./components/Prompt";
-import { toppings } from "./data/toppings";
 import {nanoid } from "nanoid";
 import Dropdown from "./components/Dropdown";
 
 import useGenerator from "./hooks/useGenerator"
-
+import useTopping from "./hooks/useTopping";
+import Topping from "./components/Topping";
 
 export default function Main() {
     const [dropdownState, setDropdownState] = useState({
         theme: ""
     });
+    const [displayTopping, setDisplayTopping] = useState(false);
 
     const {getPrompt, chosenPrompts} = useGenerator(dropdownState);
-
+    const {getTopping, newTopping} = useTopping();
 
     const promptMap = chosenPrompts.map(prompt => (
         <Prompt 
             data={prompt}
             key={nanoid()}
         />
-    ))
+    ));
+
+    //need to check if promptMap gets updated and then display the topping stuff
+    useEffect(() => {
+        promptMap.length > 0 && setDisplayTopping(true)
+    }, [promptMap])
 
     return (
         <main className="container mx-auto flex-col justify-center">
@@ -49,6 +55,21 @@ export default function Main() {
                     buttonName={"Generate"}
                 />
             </section>
+
+            {displayTopping &&
+            <section className="max-w-2xl flex-col justify-center m-auto bg-gray-green-light p-6 my-2">
+                <section className="flex justify-center items-baseline my-2">
+                    <h3 className="m-4">
+                        Need a topping to go with that flavor?
+                    </h3>
+                    <Button 
+                        handleClick={getTopping}
+                        buttonName={"Get Topping"}
+                    />
+                </section>
+                    {newTopping}
+            </section>
+            }
 
             <section className="flex justify-between flex-wrap">
                 {promptMap}
