@@ -5,14 +5,14 @@ import { flavorData } from "../data/flavors";
 function useGenerator(props) {
 
     const [flavors, setFlavors] = useState(flavorData);
-    
     const [chosenPrompts, setChosenPrompts] = useState([]);
+
 
     function getPrompt() {
 
         let promptObj = {};
 
-        //if user hasn't selected anything from the dropdown
+        //if user hasn't selected anything from the dropdown, grab from all flavors
         if(props.theme === "") {
             const allNumbers = generateNumbers(flavors.length);
             promptObj = setPromptObj(allNumbers[0], allNumbers[1], flavors);
@@ -25,6 +25,7 @@ function useGenerator(props) {
         }
        
 
+        //set state
         setChosenPrompts(prevState => {
             return [
                 ...prevState,
@@ -33,9 +34,10 @@ function useGenerator(props) {
         });
     }
 
+    //random number generator
     function generateNumbers(flavorNum) {
 
-        let randomFlavorNum = Math.floor((Math.random() * (flavorNum + 1)) + 0);
+        let randomFlavorNum = Math.floor((Math.random() * flavorNum) + 0);
         let randomPromptNum = Math.floor((Math.random() * 30) + 0); //fix later - a few prompt arrays don't have a length of 30
 
         return [
@@ -45,7 +47,6 @@ function useGenerator(props) {
     }
 
     function setPromptObj(randomFlavor, randomPrompt, array) {
-
         return {
             prompt: array[randomFlavor].prompts[randomPrompt],
             flavor: array[randomFlavor].flavor,
