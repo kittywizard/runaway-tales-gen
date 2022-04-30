@@ -40,11 +40,13 @@ export default function Main() {
                 name="theme"
                 dropdownState={dropdownState}
                 setDropdownState={setDropdownState}
+                labelName={"Select a theme:"}
             />
             <section className="flex justify-center p-6">
                 <h2 className="m-2 p-2 font-bold text-2xl text-gray">Generate a Flavor?</h2>
                  <Button 
                     handleClick={getPrompt}
+                    buttonName={"Generate"}
                 />
             </section>
 
