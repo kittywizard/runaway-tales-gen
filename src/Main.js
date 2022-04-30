@@ -57,7 +57,7 @@ export default function Main() {
             </section>
 
             {displayTopping &&
-            <section className="max-w-2xl flex-col justify-center m-auto bg-gray-green-light p-6 my-2">
+            <section className="max-w-2xl flex-col justify-center m-auto bg-gray-green-light p-6 my-2 shadow-sm shadow-gray-dark/30">
                 <section className="flex justify-center items-baseline my-2">
                     <h3 className="m-4">
                         Need a topping to go with that flavor?
