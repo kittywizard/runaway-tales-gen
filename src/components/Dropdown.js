@@ -31,7 +31,9 @@ export default function Dropdown(props){
 
     return (
        <div className="container text-center p-4">
-           <label htmlFor={props.name}>Select a theme:</label>
+           <label htmlFor={props.name}>
+               {props.labelName}
+           </label>
            <select name={props.name} 
                     className="p-2 m-2 bg-gray-green-light rounded-md"
                     onChange={handleChange}
