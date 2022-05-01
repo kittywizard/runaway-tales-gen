@@ -8,7 +8,6 @@ import Intro from "./Intro";
 
 import useGenerator from "./hooks/useGenerator"
 import useTopping from "./hooks/useTopping";
-import Topping from "./components/Topping";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
@@ -58,14 +57,17 @@ export default function Main() {
             </section>
 
             {displayTopping &&
-                <section className="max-w-2xl grid-cols-2 grid-rows-3 m-auto bg-gray-green-light p-6 my-2 shadow-sm shadow-gray-dark/30">
-                    <FontAwesomeIcon 
-                        icon={toggleTopping ? faAngleDown : faAngleLeft}
-                        onClick={handleIconClick}
-                        className="text-3xl text-dark-green hover:text-gray-dark items-end col-span-3"
-                    />
+                <section className="max-w-2xl m-auto bg-gray-green-light p-4 my-4 shadow-sm shadow-gray-dark/30">
+                    <div className="text-right">
+                        <FontAwesomeIcon 
+                            icon={toggleTopping ? faAngleDown : faAngleLeft}
+                            onClick={handleIconClick}
+                            className="text-3xl text-dark-green hover:text-gray-dark cursor-pointer"
+                        />
+                    </div>
+
                     {toggleTopping &&
-                        <section className="my-2 col-span-1">
+                        <section className="my-2">
                             <div className="flex justify-center">
                                 <h3 className="m-4">
                                     Need a topping to go with that flavor?
