@@ -7,7 +7,7 @@ export default function Nav() {
     return (
         <ul className="hidden md:flex items-center justify-between">
             <li className='p-4'>
-                <a href="http://github.com/kittywizard/RaTsGenerator"
+                <a href="http://github.com/kittywizard/runaway-tales"
                     target="_blank"
                     rel="noreferrer"
                     alt="Github"
@@ -16,7 +16,7 @@ export default function Nav() {
                 </a>
             </li>
             <li>
-            <a href="http://autocode.com"
+            <a href="https://autocode.com/app/kittywizard/basic-discord-example/"
                     target="_blank"
                     rel="noreferrer"
                     alt="Discord Bot"
