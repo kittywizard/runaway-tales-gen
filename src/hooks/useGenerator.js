@@ -13,12 +13,14 @@ function useGenerator(props) {
         let promptObj = {};
 
         //if user hasn't selected anything from the dropdown, grab from all flavors
+
+        //add another condition to check for:
+            //if user selected a specific flavor
         if(props.theme === "") {
             const allNumbers = generateNumbers(flavors);
             promptObj = setPromptObj(allNumbers[0], allNumbers[1], flavors);
 
         } else {
-
             const flavorPrompts = flavors.filter(flavor => flavor.theme === props.theme);
             const numbers = generateNumbers(flavorPrompts);
             promptObj = setPromptObj(numbers[0], numbers[1], flavorPrompts);

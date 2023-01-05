@@ -4,6 +4,7 @@ import {nanoid } from "nanoid";
 import Button from "./components/Button";
 import Prompt from "./components/Prompt";
 import Dropdown from "./components/Dropdown";
+import Search from "./components/Search";
 import Intro from "./Intro";
 
 import useGenerator from "./hooks/useGenerator"
@@ -18,6 +19,7 @@ export default function Main() {
     });
     const [displayTopping, setDisplayTopping] = useState(false);
     const [toggleTopping, setToggleTopping] = useState(true);
+    const [flavorInput, setFlavorInput] = useState('');
 
     const {getPrompt, chosenPrompts} = useGenerator(dropdownState);
     const {getTopping, newTopping} = useTopping();
@@ -47,6 +49,10 @@ export default function Main() {
                 dropdownState={dropdownState}
                 setDropdownState={setDropdownState}
                 labelName={"Select a theme:"}
+            />
+           <Search 
+                flavorInput={flavorInput}
+                setFlavorInput={setFlavorInput}
             />
             <section className="flex justify-center p-6">
                 <h2 className="m-2 p-2 font-bold text-2xl text-gray">Generate a Flavor?</h2>
