@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import React from "react"; //only to make typescript which i'm not even using to shut up
 import {nanoid } from "nanoid";
 
 import Button from "./components/Button";
 import Prompt from "./components/Prompt";
 import Dropdown from "./components/Dropdown";
-import Search from "./components/Search";
 import Intro from "./Intro";
 
 import useGenerator from "./hooks/useGenerator"
