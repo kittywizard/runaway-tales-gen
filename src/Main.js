@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React from "react"; //only to make typescript which i'm not even using to shut up
 import {nanoid } from "nanoid";
 
 import Button from "./components/Button";
@@ -10,16 +11,20 @@ import Intro from "./Intro";
 import useGenerator from "./hooks/useGenerator"
 import useTopping from "./hooks/useTopping";
 
+import { flavorData } from "./data/flavors";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 export default function Main() {
     const [dropdownState, setDropdownState] = useState({
-        theme: ""
+        theme: "",
+        flavor: ""
     });
     const [displayTopping, setDisplayTopping] = useState(false);
     const [toggleTopping, setToggleTopping] = useState(true);
-    const [flavorInput, setFlavorInput] = useState('');
+    
+    const [dropdownDisplay, setDropdownDisplay] = useState([true, true]); //theme, flavor
 
     const {getPrompt, chosenPrompts} = useGenerator(dropdownState);
     const {getTopping, newTopping} = useTopping();
@@ -41,19 +46,31 @@ export default function Main() {
         setToggleTopping(prevState => !prevState)
     }
 
+    //for the dropdowns
+    const themeSet = new Set(flavorData.map(flavor => flavor.theme));
+    const flavorSet = flavorData.map(flavor => flavor.flavor);
+    
+
     return (
         <main className="container mx-auto flex-col justify-center">
             <Intro />
-            <Dropdown 
-                name="theme"
-                dropdownState={dropdownState}
-                setDropdownState={setDropdownState}
-                labelName={"Select a theme:"}
-            />
-           <Search 
-                flavorInput={flavorInput}
-                setFlavorInput={setFlavorInput}
-            />
+            <>
+                <Dropdown 
+                    name="theme"
+                    dropdownState={dropdownState}
+                    setDropdownState={setDropdownState}
+                    labelName={"Select a theme (optional):"}
+                    dataSet={themeSet}
+                />
+                <Dropdown 
+                    name="flavor"
+                    labelName="Select a flavor (optional):"
+                    dropdownState={dropdownState}
+                    setDropdownState={setDropdownState}
+                    dataSet={flavorSet}
+                />
+            </>
+
             <section className="flex justify-center p-6">
                 <h2 className="m-2 p-2 font-bold text-2xl text-gray">Generate a Flavor?</h2>
                  <Button 

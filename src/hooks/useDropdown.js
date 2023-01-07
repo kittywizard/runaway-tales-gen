@@ -1,25 +1,30 @@
 import { useState } from "react";
-import { flavorData } from "../data/flavors";
+import Option from "../components/Option";
+import { nanoid } from "nanoid";
 
 
-export default function useDropdown() {
+export default function useDropdown(props) {
 
-
-    const flavorSet = new Set(flavorData.map(flavor => flavor.theme))
-    
-    const [dropdownState, setDropdownState] = useState({
-        theme: ""
-    });
-    
+    const dropdownMap = [];
 
     function handleChange(event) {
-        const {value} = event.target;
-        console.log(value)
-        setDropdownState(() => {
+        const {value, name} = event.target;
+        
+        props.setDropdownState(prev => {
             return {
-                theme: value
+                ...prev,
+                [name]: value
             }
         })
     }
-    return {flavorSet, handleChange, dropdownState}
+ 
+    props.dataSet.forEach(option => {
+        dropdownMap.push(        
+        <Option 
+            value={option}
+            key={nanoid()}
+        />)
+    });
+
+    return {handleChange, dropdownMap}
 }

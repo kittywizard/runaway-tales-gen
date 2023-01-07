@@ -1,32 +1,12 @@
 import Option from "./Option";
 import { nanoid } from "nanoid";
 import { flavorData } from "../data/flavors";
+import useDropdown from "../hooks/useDropdown";
 
 
 export default function Dropdown(props){
 
-    const dropdownMap = [];
-
-    //get all the dupes out
-    const flavorSet = new Set(flavorData.map(flavor => flavor.theme))
-    
-    function handleChange(event) {
-        const {value} = event.target;
-        
-        props.setDropdownState(() => {
-            return {
-                theme: value
-            }
-        })
-    }
- 
-    flavorSet.forEach(option => {
-        dropdownMap.push(        
-        <Option 
-            value={option}
-            key={nanoid()}
-        />)
-    });
+    const {handleChange, dropdownMap} = useDropdown(props);
 
 
     return (
