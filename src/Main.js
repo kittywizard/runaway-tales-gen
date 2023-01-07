@@ -24,6 +24,7 @@ export default function Main() {
     const [displayTopping, setDisplayTopping] = useState(false);
     const [toggleTopping, setToggleTopping] = useState(true);
     
+    //is this needed?
     const [dropdownDisplay, setDropdownDisplay] = useState([true, true]); //theme, flavor
 
     const {getPrompt, chosenPrompts} = useGenerator(dropdownState);
@@ -54,7 +55,7 @@ export default function Main() {
     return (
         <main className="container mx-auto flex-col justify-center">
             <Intro />
-            <>
+            <div className="container flex flex-row justify-between">  
                 <Dropdown 
                     name="theme"
                     dropdownState={dropdownState}
@@ -69,7 +70,7 @@ export default function Main() {
                     setDropdownState={setDropdownState}
                     dataSet={flavorSet}
                 />
-            </>
+            </div>
 
             <section className="flex justify-center p-6">
                 <h2 className="m-2 p-2 font-bold text-2xl text-gray">Generate a Flavor?</h2>
