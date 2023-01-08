@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import React from "react"; //only to make typescript which i'm not even using to shut up
 import {nanoid } from "nanoid";
 
 import Button from "./components/Button";
 import Prompt from "./components/Prompt";
 import Dropdown from "./components/Dropdown";
-import Search from "./components/Search";
 import Intro from "./Intro";
 
 import useGenerator from "./hooks/useGenerator"
@@ -51,7 +49,6 @@ export default function Main() {
     const themeSet = new Set(flavorData.map(flavor => flavor.theme));
     const flavorSet = flavorData.map(flavor => flavor.flavor);
     
-
     return (
         <main className="container mx-auto flex-col justify-center">
             <Intro />
@@ -72,7 +69,7 @@ export default function Main() {
                 />
             </div>
 
-            <section className="flex justify-center p-6">
+            <section className="flex justify-center p-4">
                 <h2 className="m-2 p-2 font-bold text-2xl text-gray">Generate a Flavor?</h2>
                  <Button 
                     handleClick={getPrompt}
@@ -92,10 +89,13 @@ export default function Main() {
 
                     {toggleTopping &&
                         <section className="my-2">
-                            <div className="flex justify-center">
-                                <h3 className="m-4">
-                                    Need a topping to go with that flavor?
-                                </h3>
+                            <div className="flex justify-between">
+                                <div className="flex-col mx-4">
+                                    <h3 className="mb-1 font-bold text-lg">
+                                        Need a topping to go with that flavor?
+                                    </h3>
+                                    <p className="text-xs">Toppings are optional add-ons that can completely change what (or who!) you're writing about.</p>
+                                </div>
                                 <Button 
                                     handleClick={getTopping}
                                     buttonName={"Get Topping"}

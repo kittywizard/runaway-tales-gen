@@ -17,7 +17,7 @@ export default function Dropdown(props){
            <select name={props.name} 
                     className="p-2 m-2 bg-gray-green-light rounded-md"
                     onChange={handleChange}
-                    value={props.dropdownState.theme}
+                    value={props.name == "theme" ? props.dropdownState.theme : props.dropdownState.flavor}
             >
                 <Option value="" />
                 {dropdownMap}
