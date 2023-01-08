@@ -30,7 +30,6 @@ function useGenerator(props) {
             promptObj = setPromptObj(numbers[0], numbers[1], themePrompts);
         }
        
-
         //set state
         setChosenPrompts(prevState => {
             return [
